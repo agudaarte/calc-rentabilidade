@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ativos - Descubra a rentabilidade de sua carteira</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Use a Calculadora de Ativos para descobrir a rentabilidade e o desempenho da sua carteira de investimentos de maneira simples e eficaz.">
+    <meta name="keywords" content="calculadora de ativos, rentabilidade de carteira, investimentos, DY, dividendos, retorno de ativos, mercado financeiro">
+    <meta name="author" content="Gabriel Alcantara">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="Calculadora de Ativos - Rentabilidade da sua carteira de investimentos">
+    <meta property="og:description" content="Descubra a rentabilidade da sua carteira de maneira simples com nossa Calculadora de Ativos.">
+    <meta property="og:image" content="URL_DA_IMAGEM_AQUI">
+    <meta property="og:url" content="https://SEU_SITE.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculadora de Ativos - Rentabilidade da sua carteira de investimentos">
+    <meta name="twitter:description" content="Use nossa calculadora de ativos para descobrir o desempenho financeiro da sua carteira.">
+    <meta name="twitter:image" content="URL_DA_IMAGEM_AQUI">
+
+    <!-- Favicon -->
+    <link rel="icon" href="URL_DO_FAVICON_AQUI" type="image/png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0038A8; /* Azul escuro semelhante ao do Cruzeiro EC */
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #fff; /* Branco */
+        }
+        h2 {
+            color: #fff; /* Branco */
+        }
+        form {
+            background-color: #f0f8ff; /* Branco */
+            color: #333; /* Texto escuro */
+            border-radius: 8px;
+            padding: 20px;
+            display: inline-block; /* Mantém o formulário em uma linha centralizada */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #fff; /* Branco */
+            color: #333; /* Texto escuro */
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e0e0e0; /* Leve efeito ao passar o mouse */
+        }
+        .resultados {
+            background-color: rgba(255, 255, 255, 0.9); /* Branco com leve transparência */
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: inline-block; /* Centraliza os resultados */
+            color: #000; /* Texto dos resultados em preto */
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #fff; /* Texto do rodapé em branco */
+        }
+        .linkedin-icon, .email-icon {
+            width: 30px; /* Ajusta o tamanho do ícone */
+            vertical-align: middle;
+            margin-left: 10px;
+            cursor: pointer; /* Indica que é clicável */
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Ativos</h1>
+    <h2>Descubra o retorno total da sua carteira de maneira mais simples</h2>
+
+    <form id="form">
+        <label for="nomeAtivo">Nome do Ativo:</label><br>
+        <input type="text" id="nomeAtivo" required><br><br>
+        
+        <label for="capital">Capital Investido (R$):</label><br>
+        <input type="text" id="capital" required><br><br>
+        
+        <label for="dy">DY (%):</label><br>
+        <input type="number" id="dy" required step="0.01" min="0"><br><br>
+        
+        <label for="rentabilidade">Rentabilidade (%):</label><br>
+        <input type="text" id="rentabilidade" required><br><br>
+        
+        <button type="submit">Adicionar Ativo</button>
+        <button type="button" id="calcular">Calcular Resultados</button>
+    </form>
+
+    <div class="resultados" id="resultadoDiv" style="display:none;"></div>
+    <button id="baixarResultados" style="display:none;">Baixar Resultados</button>
+
+    <script>
+        const ativos = [];
+
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nomeAtivo = document.getElementById('nomeAtivo').value;
+            const capital = parseNumber(document.getElementById('capital').value);
+            const dy = parseFloat(document.getElementById('dy').value);
+            const rentabilidade = parseNumber(document.getElementById('rentabilidade').value);
+
+            ativos.push({ nome: nomeAtivo, capital, dy, rentabilidade });
+
+            alert('Ativo adicionado com sucesso!');
+
+            // Limpa o formulário
+            this.reset();
+        });
+
+        document.getElementById('calcular').addEventListener('click', function() {
+            calcularResultados();
+        });
+
+        function parseNumber(value) {
+            // Substitui vírgulas por pontos e remove pontos que não sejam o decimal
+            return parseFloat(value.replace(/\./g, '').replace(',', '.'));
+        }
+
+        function calcularResultados() {
+            let totalInvestido = 0;
+            let somatorioDy = 0;
+            let somatorioRentabilidade = 0;
+
+            ativos.forEach(ativo => {
+                totalInvestido += ativo.capital;
+                somatorioDy += (ativo.capital * ativo.dy) / 100;
+                somatorioRentabilidade += (ativo.capital * ativo.rentabilidade) / 100;
+            });
+
+            const mediaPonderadaDy = (somatorioDy / totalInvestido) * 100; // Conversão para porcentagem
+            const mediaPonderadaRentabilidade = (somatorioRentabilidade / totalInvestido) * 100; // Conversão para porcentagem
+            const totalFinal = totalInvestido + somatorioDy + somatorioRentabilidade;
+            const aproveitamento = ((totalFinal - totalInvestido) / totalInvestido) * 100;
+
+            // Cria texto com os ativos em formato de tabela para exibição
+            let tabelaAtivos = `
+            <table>
+                <tr>
+                    <th>Nome do Ativo</th>
+                    <th>Capital Investido (R$)</th>
+                    <th>DY (%)</th>
+                    <th>Rentabilidade (%)</th>
+                </tr>`;
+            ativos.forEach(ativo => {
+                tabelaAtivos += `
+                <tr>
+                    <td>${ativo.nome}</td>
+                    <td>R$ ${ativo.capital.toFixed(2).replace('.', ',')}</td>
+                    <td>${ativo.dy.toFixed(2).replace('.', ',')}%</td>
+                    <td>${ativo.rentabilidade.toFixed(2).replace('.', ',')}%</td>
+                </tr>`;
+            });
+            tabelaAtivos += `</table>`;
+
+            // Resultados Finais
+            let textoResultados = `
+            Resultados Finais:
+            Somatório Total Investido: R$ ${totalInvestido.toFixed(2).replace('.', ',')}
+            Média Ponderada do DY: ${mediaPonderadaDy.toFixed(2).replace('.', ',')}%
+            Média Ponderada da Rentabilidade: ${mediaPonderadaRentabilidade.toFixed(2).replace('.', ',')}%
+            Total Final (Capital + DY + Rentabilidade): R$ ${totalFinal.toFixed(2).replace('.', ',')}
+            Aproveitamento Anual: ${aproveitamento.toFixed(2).replace('.', ',')}%
+            `;
+
+            // Atualiza a exibição
+            document.getElementById('resultadoDiv').innerHTML = tabelaAtivos + '<br>' + textoResultados.replace(/\n/g, '<br>');
+            document.getElementById('resultadoDiv').style.display = 'block';
+            document.getElementById('baixarResultados').style.display = 'block';
+
+            // Adiciona evento para baixar os resultados
+            document.getElementById('baixarResultados').onclick = function() {
+                baixarResultados(textoResultados);
+            };
+        }
+
+        function baixarResultados(textoResultados) {
+            let ativosTexto = "Ativos Adicionados:\n";
+            ativos.forEach(ativo => {
+                ativosTexto += `${ativo.nome}: Capital Investido: R$ ${ativo.capital.toFixed(2).replace('.', ',')} | DY: ${ativo.dy.toFixed(2).replace('.', ',')}% | Rentabilidade: ${ativo.rentabilidade.toFixed(2).replace('.', ',')}%\n`;
+            });
+
+            const blob = new Blob([ativosTexto + '\n' + textoResultados], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'resultados_calculadora_ativos.txt';
+            link.click();
+        }
+    </script>
+
+    <footer>
+        &copy; 2024 Gabriel Alcantara. Todos os direitos reservados.
+        <p>Este site e seu conteúdo são propriedade de Gabriel Alcantara. Nenhuma parte deste site pode ser reproduzida, distribuída, ou utilizada sem permissão expressa.</p>
+        <p>
+            <a href="https://www.linkedin.com/in/gabrielfaa/" target="_blank">
+                <img src="https://image.flaticon.com/icons/png/512/174/174857.png" alt="LinkedIn" class="linkedin-icon" title="Visite meu LinkedIn">
+            </a>
+            <a href="mailto:agudaarte@gmail.com?subject=Contato Gabriel - Calculadora Ativos&body=Feedback/Sugestões/Elogios/Criticas">
+                <img src="https://image.flaticon.com/icons/png/512/732/732200.png" alt="Email" class="email-icon" title="Entre em contato via email">
+            </a>
+        </p>
+    </footer>
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXX"
+         data-ad-format="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
