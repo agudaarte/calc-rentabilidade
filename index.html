@@ -2,17 +2,17 @@
 <html lang="pt-BR">
 <head>
     <script type="text/javascript">
-	atOptions = {
-		'key' : '9c2a1fd74cd08dc77ca939ad41abcac4',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/9c2a1fd74cd08dc77ca939ad41abcac4/invoke.js"></script>
+        atOptions = {
+            'key' : '9c2a1fd74cd08dc77ca939ad41abcac4',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/9c2a1fd74cd08dc77ca939ad41abcac4/invoke.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770452477381874"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculadora de Ativos para descobrir o retorno total e a rentabilidade da sua carteira de investimentos. Simples e rápido.">
@@ -79,9 +79,17 @@
             font-size: 0.9em;
             color: #fff; /* Texto do rodapé em branco */
         }
+        .banner {
+            margin: 20px 0; /* Espaçamento em cima e embaixo dos banners */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f2f2f2; /* Cor de fundo do espaço do banner */
+            border: 1px solid #ccc; /* Borda do espaço do banner */
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7b0WyRfxz2a4N2d+Zoj/xr41R3D37iSOz1Kq6H+Kbbd7YO5uVxDBY3Kw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script type='text/javascript' src='//pl24835989.profitablecpmrate.com/91/67/84/916784f3ad06d64a572344989a9b768f.js'></script>
+    <script type='text/javascript' src='//pl24835989.profitablecpmrate.com/91/67/84/916784f3ad06d64a572344989a9b768f.js'></script>
 </head>
 <body>
     <h1>Calculadora de Ativos</h1>
@@ -103,6 +111,25 @@
         <button type="submit" aria-label="Adicionar Ativo">Adicionar Ativo</button>
         <button type="button" id="calcular">Calcular Resultados</button>
     </form>
+
+    <!-- Espaço para o banner 300x250 -->
+    <div class="banner" style="width: 300px; height: 250px;">
+        <script type="text/javascript" src="//www.highperformanceformat.com/9c2a1fd74cd08dc77ca939ad41abcac4/invoke.js"></script>
+    </div>
+
+    <!-- Espaço para o banner 320x50 -->
+    <div class="banner" style="width: 320px; height: 50px;">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '9c2a1fd74cd08dc77ca939ad41abcac4',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/9c2a1fd74cd08dc77ca939ad41abcac4/invoke.js"></script>
+    </div>
 
     <div class="resultados" id="resultadoDiv" style="display:none;"></div>
     <button id="baixarResultados" style="display:none;">Baixar Resultados</button>
@@ -153,98 +180,25 @@
 
             const mediaPonderadaDy = (somatorioDy / totalInvestido) * 100; // Conversão para porcentagem
             const mediaPonderadaRentabilidade = (somatorioRentabilidade / totalInvestido) * 100; // Conversão para porcentagem
-            const totalFinal = totalInvestido + somatorioDy + somatorioRentabilidade;
-            const aproveitamento = ((totalFinal - totalInvestido) / totalInvestido) * 100;
+            const totalFinal = totalInvestido + somatorioRentabilidade;
 
-            // Cria texto com os ativos em formato de tabela para exibição
-            let tabelaAtivos = `
-            <table>
-                <tr>
-                    <th>Nome do Ativo</th>
-                    <th>Capital Investido (R$)</th>
-                    <th>DY (%)</th>
-                    <th>Rentabilidade (%)</th>
-                    <th>Ações</th>
-                </tr>`;
-            ativos.forEach((ativo, index) => {
-                tabelaAtivos += `
-                <tr>
-                    <td>${ativo.nome}</td>
-                    <td>R$ ${ativo.capital.toFixed(2).replace('.', ',')}</td>
-                    <td>${ativo.dy.toFixed(2).replace('.', ',')}%</td>
-                    <td>${ativo.rentabilidade.toFixed(2).replace('.', ',')}%</td>
-                    <td><button onclick="removerAtivo(${index})" aria-label="Remover ativo">🗑️</button></td>
-                </tr>`;
-            });
-            tabelaAtivos += `</table>`;
+            const resultadosDiv = document.getElementById('resultadoDiv');
+            resultadosDiv.style.display = 'block';
+            resultadosDiv.innerHTML = `
+                <h2>Resultados</h2>
+                <p>Total Investido: R$ ${totalInvestido.toFixed(2)}</p>
+                <p>Dividendo Anual: R$ ${somatorioDy.toFixed(2)}</p>
+                <p>Rentabilidade Anual: R$ ${somatorioRentabilidade.toFixed(2)}</p>
+                <p>Rentabilidade Média Ponderada de DY: ${mediaPonderadaDy.toFixed(2)}%</p>
+                <p>Rentabilidade Média Ponderada: ${mediaPonderadaRentabilidade.toFixed(2)}%</p>
+                <p>Total após Rentabilidade: R$ ${totalFinal.toFixed(2)}</p>
+            `;
 
-            // Resultados Finais
-            let textoResultados = `
-            <div>
-            <strong>Resultados do Aproveitamento Total:</strong><br>
-            Somatório Total Investido: R$ ${totalInvestido.toFixed(2).replace('.', ',')} <br>
-            Média Ponderada do DY: ${mediaPonderadaDy.toFixed(2).replace('.', ',')}% <br>
-            Média Ponderada da Rentabilidade: ${mediaPonderadaRentabilidade.toFixed(2).replace('.', ',')}% <br>
-            Total Final (Capital + DY + Rentabilidade): R$ ${totalFinal.toFixed(2).replace('.', ',')} <br>
-            Aproveitamento Total: ${aproveitamento.toFixed(2).replace('.', ',')}% <br>
-            </div>`;
-
-            // Atualiza a exibição
-            document.getElementById('resultadoDiv').innerHTML = tabelaAtivos + '<br>' + textoResultados;
-            document.getElementById('resultadoDiv').style.display = 'block';
             document.getElementById('baixarResultados').style.display = 'block';
-
-            // Adiciona evento para baixar os resultados
-            document.getElementById('baixarResultados').onclick = function() {
-                baixarResultados(totalInvestido, mediaPonderadaDy, mediaPonderadaRentabilidade, totalFinal, aproveitamento);
-            };
-        }
-
-        function removerAtivo(index) {
-            ativos.splice(index, 1);
-            alert('Ativo removido com sucesso!');
-            calcularResultados(); // Recalcula os resultados
-        }
-
-        function baixarResultados(totalInvestido, mediaPonderadaDy, mediaPonderadaRentabilidade, totalFinal, aproveitamento) {
-            let conteudo = 'Resultados da Calculadora de Ativos:\n\n';
-            ativos.forEach(ativo => {
-                conteudo += `Nome do Ativo: ${ativo.nome}\n`;
-                conteudo += `Capital Investido: R$ ${ativo.capital.toFixed(2).replace('.', ',')}\n`;
-                conteudo += `DY: ${ativo.dy.toFixed(2).replace('.', ',')}%\n`;
-                conteudo += `Rentabilidade: ${ativo.rentabilidade.toFixed(2).replace('.', ',')}%\n\n`;
-            });
-
-            // Adiciona os resultados finais
-            conteudo += 'Resultados do Aproveitamento Total:\n';
-            conteudo += `Somatório Total Investido: R$ ${totalInvestido.toFixed(2).replace('.', ',')}\n`;
-            conteudo += `Média Ponderada do DY: ${mediaPonderadaDy.toFixed(2).replace('.', ',')}%\n`;
-            conteudo += `Média Ponderada da Rentabilidade: ${mediaPonderadaRentabilidade.toFixed(2).replace('.', ',')}%\n`;
-            conteudo += `Total Final (Capital + DY + Rentabilidade): R$ ${totalFinal.toFixed(2).replace('.', ',')}\n`;
-            conteudo += `Aproveitamento Total: ${aproveitamento.toFixed(2).replace('.', ',')}%\n\n`;
-
-            // Mensagem final
-            conteudo += 'Obrigado por visitar o nosso site! Não se esqueça de salvar nos favoritos. Siga em frente e não desista do seu sonho!';
-
-            const blob = new Blob([conteudo], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'resultados.txt';
-            link.click();
         }
     </script>
-
     <footer>
-        <p>&copy; 2024 Gabriel Alcantara. Todos os direitos reservados.</p>
-        <p>Este site e seu conteúdo são propriedade de Gabriel Alcantara. Nenhuma parte deste site pode ser reproduzida, distribuída, ou utilizada sem permissão expressa.</p>
-        <p>Conecte-se comigo no 
-            <a href="https://www.linkedin.com/in/gabrielfaa/" target="_blank" style="color: #fff;">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a> ou 
-            <a href="mailto:agudaarte@gmail.com?subject=Calculadora de Ativos" style="color: #fff;">
-                <i class="fas fa-envelope"></i> e-mail
-            </a>
-        </p>
+        <p>&copy; 2024 Calculadora de Ativos. Todos os direitos reservados.</p>
     </footer>
 </body>
 </html>
